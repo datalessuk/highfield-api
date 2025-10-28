@@ -3,6 +3,6 @@
     public class ProcessedUserData
     {
         public List<ColourFrequency> ColourFrequency { get; set; }
-        public List<IUsersAge> UsersAges { get; set; }
+        public List<UsersAge> UsersAges { get; set; }
     }
 }

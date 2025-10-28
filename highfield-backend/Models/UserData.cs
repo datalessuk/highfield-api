@@ -2,12 +2,12 @@
 {
     public class UserData
     {
-        public string id { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string email { get; set; }
-        public DateTime dob { get; set; }
-        public string favouriteColour {  get; set; }
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public DateTime Dob { get; set; }
+        public string FavouriteColour {  get; set; }
 
     }
 }

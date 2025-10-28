@@ -30,27 +30,10 @@ namespace highfield_backend.Services
                 return new ProcessedUserData();
 
 
-            var colorFrequency = data
-             .GroupBy(u => u.favouriteColour)
-             .Select(g => new ColourFrequency { Colour = g.Key, Count = g.Count() })
-             .OrderByDescending(x => x.Count)
-             .ThenBy(x => x.Colour)
-             .ToList();
-
-
-            var today = DateTime.Today;
-            var modifiedAges = data
-            .Select(u => {
-                var age = today.Year - u.dob.Year;
-                if (u.dob.Date > today.AddYears(-age)) age--;
-                return new IUsersAge
-                {
-                    firstName = u.firstName,
-                    lastName = u.lastName,
-                    currentAge = age,
-                    ageIn20Years = age + 20
-                };
-            })
+            var colorFrequency = GetColorFrequency(data);
+            
+            var modifiedAges = GetAllUsersAge(data)
+            
             .ToList();
 
             return new ProcessedUserData
@@ -60,6 +43,29 @@ namespace highfield_backend.Services
             };
 
         }
+        public static List<ColourFrequency> GetColorFrequency(IEnumerable<UserData> data)
+        {
+            return data.GroupBy(u => u.FavouriteColour)
+             .Select(g => new ColourFrequency { Colour = g.Key, Count = g.Count() })
+             .OrderByDescending(x => x.Count)
+             .ThenBy(x => x.Colour)
+             .ToList();
+        }
 
+        public static List<UsersAge> GetAllUsersAge(IEnumerable<UserData> data) {
+            var today = DateTime.Today;
+            return data.Select(u => {
+                var age = today.Year - u.Dob.Year;
+                if (u.Dob.Date > today.AddYears(-age)) age--;
+                return new UsersAge
+                {
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    CurrentAge = age,
+                    AgeIn20Years = age + 20
+                };
+            })
+            .ToList();
+        }
     }
 }

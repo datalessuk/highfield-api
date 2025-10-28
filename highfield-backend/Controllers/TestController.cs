@@ -5,7 +5,7 @@ namespace highfield_backend.Controllers
 {
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/users")]
     public class TestController : ControllerBase
     {
 
