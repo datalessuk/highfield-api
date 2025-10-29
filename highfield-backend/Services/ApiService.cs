@@ -21,6 +21,9 @@ namespace highfield_backend.Services
 
             var json = await response.Content.ReadAsStringAsync();
 
+            if (string.IsNullOrWhiteSpace(json))
+                return new ProcessedUserData();
+
             var data = JsonSerializer.Deserialize<UserData[]>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
