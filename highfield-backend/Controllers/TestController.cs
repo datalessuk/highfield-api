@@ -8,8 +8,6 @@ namespace highfield_backend.Controllers
     [Route("api/users")]
     public class TestController : ControllerBase
     {
-
-        private readonly HttpClient _httpClient;
         private readonly ApiService _apiService;
 
         public TestController(ApiService apiService)
